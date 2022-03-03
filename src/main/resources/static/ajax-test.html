@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>lou.SpringBoot | Ajax request test</title>
+  </head>
+
+  <body class="hold-transition login-page">
+    <div style="width:720px;margin:7% auto">
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="m-0">API Test1</h5>
+                </div>
+                <div class="card-body">
+                  <input
+                    type="text"
+                    id="info"
+                    class="form-control"
+                    placeholder="Please input infoval"
+                  />
+                  <h6 class="card-title">This is API1 return value</h6>
+                  <p class="card-text" id="test1"></p>
+                  <a href="#" class="btn btn-primary" onclick="requestTest1()"
+                    >Send Request1</a
+                  >
+                </div>
+              </div>
+              <br />
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                  <h5 class="m-0">API Request2</h5>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title">This is API2 return value</h6>
+                  <p class="card-text" id="test2"></p>
+                  <a href="#" class="btn btn-primary" onclick="requestTest2()"
+                    >Send Request2</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.staticfile.org/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    function requestTest1() {
+      var info = $('#info').val();
+      $.ajax({
+        type: 'GET', //方法类型
+        dataType: 'text', //预期服务器返回的数据类型
+        url: 'api/test1?info=' + info, //请求地址
+        contentType: 'application/json; charset=utf-8',
+        success: function (result) {
+          //请求成功后回调
+          $('#test1').html(JSON.stringify(result));
+        },
+        error: function () {
+          //请求失败后回调
+          $('#test1').html('API EXCEPTION');
+        },
+      });
+    }
+    function requestTest2() {
+      $.ajax({
+        type: 'GET', //方法类型
+        dataType: 'json', //预期服务器返回的数据类型
+        url: 'api/test2',
+        contentType: 'application/json; charset=utf-8',
+        success: function (result) {
+          $('#test2').html(JSON.stringify(result));
+        },
+        error: function () {
+          $('#test2').html('API EXCEPTION！');
+        },
+      });
+    }
+  </script>
+</html>
